@@ -1,0 +1,1251 @@
+-- ******************************
+-- Kreirati bazu april_PolovniAutomobili
+-- ******************************
+-- CREATE DATABASE april_PolovniAutomobili COLLATE Serbian_Latin_100_CI_AS;
+
+USE april_PolovniAutomobili;
+GO
+
+CREATE TABLE Proizvodjac (
+ProizvodjacID int primary key not null,
+NazivProizvodjaca nvarchar(50) not null
+);
+
+CREATE TABLE Model (
+ModelID int primary key not null,
+Naziv nvarchar(50) not null,
+ProizvodjacID int foreign key references Proizvodjac (ProizvodjacID)
+);
+
+CREATE TABLE Gorivo (
+GorivoID int primary key not null,
+NazivGoriva nvarchar(50) not null,
+OpisGoriva text
+);
+
+CREATE TABLE Boja (
+BojaID int primary key not null,
+NazivBoje nvarchar(50) not null,
+OpisBoje text
+);
+
+CREATE TABLE Vozilo (
+VoziloID int primary key not null,
+Registracija nvarchar(50),
+GodinaProizvodnje int not null,
+PredjenoKM int not null,
+ModelID int foreign key references Model (ModelID),
+BojaID int foreign key references Boja (BojaID),
+GorivoID int foreign key references Gorivo (GorivoID)
+);
+
+insert into Boja (BojaID, NazivBoje) values (1, 'Crna');
+insert into Boja (BojaID, NazivBoje) values (2, 'Bela');
+insert into Boja (BojaID, NazivBoje) values (3, 'Plava');
+insert into Boja (BojaID, NazivBoje) values (4, 'Zelena');
+insert into Boja (BojaID, NazivBoje) values (5, 'Crvena');
+insert into Boja (BojaID, NazivBoje) values (6, 'Žuta');
+insert into Boja (BojaID, NazivBoje) values (7, 'Siva');
+insert into Boja (BojaID, NazivBoje) values (8, 'Smeđa');
+
+insert into Gorivo (GorivoID, NazivGoriva) values (1, 'Benzin');
+insert into Gorivo (GorivoID, NazivGoriva) values (2, 'Dizel');
+
+INSERT INTO Proizvodjac (ProizvodjacID, NazivProizvodjaca) VALUES
+(1, 'Volkswagen'),
+(2, 'Audi'),
+(3, 'BMW'),
+(4, 'Mercedes-Benz'),
+(5, 'Renault'),
+(6, 'Peugeot'),
+(7, 'Opel'),
+(8, 'Ford'),
+(9, 'Fiat'),
+(10, 'Skoda'),
+(11, 'Seat'),
+(12, 'Hyundai'),
+(13, 'Kia'),
+(14, 'Toyota'),
+(15, 'Honda'),
+(16, 'Mazda'),
+(17, 'Nissan'),
+(18, 'Dacia'),
+(19, 'Volvo'),
+(20, 'Citroen'),
+(21, 'Mitsubishi'),
+(22, 'Subaru'),
+(23, 'Tesla'),
+(24, 'Chevrolet'),
+(25, 'Dodge'),
+(26, 'Jeep'),
+(27, 'Land Rover'),
+(28, 'Alfa Romeo'),
+(29, 'Porsche'),
+(30, 'Suzuki');
+
+INSERT INTO Model (ModelID, Naziv, ProizvodjacID) VALUES
+(1, 'Golf 5', 1),
+(2, 'Golf 6', 1),
+(3, 'Golf 7', 1),
+(4, 'Passat B6', 1),
+(5, 'Passat B7', 1),
+(6, 'Passat B8', 1),
+
+(7, 'A3', 2),
+(8, 'A4', 2),
+(9, 'A5', 2),
+(10, 'A6', 2),
+(11, 'A7', 2),
+(12, 'Q3', 2),
+(13, 'Q5', 2),
+(14, 'Q7', 2),
+
+(15, 'Serija 1', 3),
+(16, 'Serija 3', 3),
+(17, 'Serija 5', 3),
+(18, 'Serija 7', 3),
+(19, 'X1', 3),
+(20, 'X3', 3),
+(21, 'X5', 3),
+
+(22, 'C klasa', 4),
+(23, 'E klasa', 4),
+(24, 'S klasa', 4),
+(25, 'GLA', 4),
+(26, 'GLC', 4),
+(27, 'GLE', 4),
+
+(28, 'Clio', 5),
+(29, 'Megane', 5),
+(30, 'Laguna', 5),
+(31, 'Captur', 5),
+(32, 'Kadjar', 5),
+
+(33, 'Peugeot 206', 6),
+(34, 'Peugeot 207', 6),
+(35, 'Peugeot 208', 6),
+(36, 'Peugeot 308', 6),
+(37, 'Peugeot 508', 6),
+
+(38, 'Corsa', 7),
+(39, 'Astra', 7),
+(40, 'Insignia', 7),
+(41, 'Mokka', 7),
+
+(42, 'Fiesta', 8),
+(43, 'Focus', 8),
+(44, 'Mondeo', 8),
+(45, 'Kuga', 8),
+
+(46, 'Punto', 9),
+(47, 'Bravo', 9),
+(48, 'Tipo', 9),
+(49, '500', 9),
+
+(50, 'Octavia', 10),
+(51, 'Fabia', 10),
+(52, 'Superb', 10),
+(53, 'Kodiaq', 10),
+
+(54, 'Ibiza', 11),
+(55, 'Leon', 11),
+(56, 'Toledo', 11),
+(57, 'Ateca', 11),
+
+(58, 'i20', 12),
+(59, 'i30', 12),
+(60, 'Tucson', 12),
+(61, 'Santa Fe', 12),
+
+(62, 'Rio', 13),
+(63, 'Ceed', 13),
+(64, 'Sportage', 13),
+
+(65, 'Corolla', 14),
+(66, 'Yaris', 14),
+(67, 'Avensis', 14),
+(68, 'RAV4', 14),
+
+(69, 'Civic', 15),
+(70, 'Accord', 15),
+(71, 'CR-V', 15),
+
+(72, 'Mazda 2', 16),
+(73, 'Mazda 3', 16),
+(74, 'Mazda 6', 16),
+(75, 'CX-5', 16),
+
+(76, 'Micra', 17),
+(77, 'Qashqai', 17),
+(78, 'X-Trail', 17),
+
+(79, 'Sandero', 18),
+(80, 'Duster', 18),
+(81, 'Logan', 18),
+
+(82, 'XC40', 19),
+(83, 'XC60', 19),
+(84, 'XC90', 19),
+
+(85, 'C3', 20),
+(86, 'C4', 20),
+(87, 'C5', 20),
+
+(88, 'Outlander', 21),
+(89, 'ASX', 21),
+
+(90, 'Forester', 22),
+(91, 'Impreza', 22),
+
+(92, 'Model S', 23),
+(93, 'Model 3', 23),
+(94, 'Model X', 23),
+(95, 'Model Y', 23),
+
+(96, 'Mustang', 8),
+(97, 'Camaro', 24),
+(98, 'Charger', 25),
+
+(99, 'Wrangler', 26),
+(100, 'Cherokee', 26),
+
+(101, 'Range Rover', 27),
+(102, 'Discovery', 27),
+
+(103, 'Giulia', 28),
+(104, 'Stelvio', 28),
+
+(105, 'Panamera', 29),
+(106, 'Cayenne', 29),
+
+(107, 'Macan', 29),
+(108, '911', 29),
+
+(109, 'Swift', 30),
+(110, 'Vitara', 30);
+
+INSERT INTO Vozilo (VoziloID, ModelID, GodinaProizvodnje, PredjenoKM, GorivoID, BojaID) VALUES
+(1, 1, 2010, 180000, 1, 1),
+(2, 2, 2012, 150000, 1, 2),
+(3, 3, 2015, 120000, 1, 3),
+(4, 4, 2011, 200000, 2, 4),
+(5, 5, 2014, 170000, 1, 5),
+
+(6, 7, 2013, 160000, 1, 6),
+(7, 8, 2016, 110000, 1, 7),
+(8, 10, 2018, 90000, 1, 8),
+(9, 12, 2019, 80000, 1, 1),
+
+(10, 16, 2012, 210000, 1, 2),
+(11, 17, 2015, 140000, 1, 3),
+(12, 20, 2017, 100000, 2, 4),
+
+(13, 22, 2011, 220000, 1, 5),
+(14, 23, 2014, 160000, 1, 6),
+(15, 25, 2018, 90000, 1, 7),
+
+(16, 28, 2013, 130000, 1, 8),
+(17, 29, 2016, 100000, 1, 1),
+
+(18, 33, 2010, 200000, 1, 5),
+(19, 36, 2015, 120000, 1, 5),
+
+(20, 38, 2012, 180000, 1, 6),
+(21, 39, 2016, 110000, 2, 8),
+
+(22, 42, 2014, 140000, 1, 2),
+(23, 43, 2017, 100000, 1, 3),
+
+(24, 46, 2011, 190000, 1, 4),
+(25, 48, 2018, 80000, 1, 4),
+
+(26, 50, 2015, 130000, 1, 5),
+(27, 52, 2019, 70000, 1, 5),
+
+(28, 54, 2013, 150000, 1, 8),
+(29, 55, 2016, 110000, 1, 7),
+
+(30, 58, 2017, 90000, 1, 7),
+(31, 60, 2019, 60000, 2, 7),
+
+(32, 62, 2015, 120000, 1, 2),
+(33, 64, 2018, 80000, 1, 2),
+
+(34, 65, 2014, 130000, 1, 1),
+(35, 68, 2020, 50000, 1, 6),
+
+(36, 69, 2013, 140000, 1, 4),
+(37, 71, 2017, 90000, 2, 4),
+
+(38, 73, 2016, 110000, 1, 4),
+(39, 75, 2019, 70000, 1, 5),
+
+(40, 77, 2018, 80000, 1, 5),
+(41, 80, 2020, 40000, 1, 1),
+
+(42, 82, 2021, 30000, 2, 1),
+(43, 83, 2019, 60000, 1, 1),
+
+(44, 85, 2015, 130000, 1, 3),
+(45, 87, 2017, 100000, 1, 3),
+
+(46, 88, 2016, 120000, 1, 3),
+(47, 90, 2014, 150000, 1, 4),
+
+(48, 92, 2021, 20000, 2, 5),
+(49, 93, 2022, 15000, 1, 6),
+
+(50, 96, 2018, 50000, 1, 3),
+(51, 97, 2017, 60000, 2, 5),
+
+(52, 99, 2015, 100000, 1, 4),
+(53, 101, 2019, 70000, 1, 7),
+
+(54, 103, 2020, 50000, 1, 7),
+(55, 105, 2019, 60000, 2, 8),
+
+(56, 109, 2016, 90000, 1, 1),
+(57, 110, 2018, 70000, 1, 2);
+
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (59, 2014, 209374, 7, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (60, 2012, 124490, 6, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (61, 2008, 217549, 10, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (62, 2018, 108806, 3, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (63, 2016, 69264, 29, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (64, 2008, 154930, 31, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (65, 2021, 191290, 30, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (66, 2007, 218834, 30, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (67, 2017, 123217, 15, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (68, 2005, 162596, 26, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (69, 2009, 36725, 13, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (70, 2009, 148647, 21, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (71, 2006, 161257, 34, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (72, 2007, 46742, 7, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (73, 2013, 154212, 10, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (74, 2022, 220801, 29, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (75, 2005, 121107, 38, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (76, 2021, 204109, 29, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (77, 2002, 120669, 25, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (78, 2021, 75028, 36, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (79, 2012, 11564, 17, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (80, 2007, 40878, 15, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (81, 2012, 194158, 33, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (82, 2019, 216465, 13, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (83, 2007, 10378, 7, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (84, 2011, 7710, 38, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (85, 2013, 215738, 1, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (86, 2001, 33059, 11, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (87, 2014, 38566, 1, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (88, 2020, 74684, 11, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (89, 2017, 140369, 33, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (90, 2003, 91169, 2, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (91, 2005, 177798, 22, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (92, 2021, 170702, 37, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (93, 2005, 19621, 18, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (94, 2009, 58327, 29, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (95, 2018, 195960, 35, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (96, 2008, 83833, 14, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (97, 2018, 26762, 4, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (98, 2022, 10868, 25, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (99, 2016, 71001, 40, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (100, 2001, 77732, 39, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (101, 2007, 13279, 36, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (102, 2008, 15476, 8, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (103, 2020, 221898, 17, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (104, 2019, 89970, 15, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (105, 2018, 180153, 13, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (106, 2016, 55819, 30, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (107, 2012, 29453, 23, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (108, 2014, 132475, 6, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (109, 2015, 55834, 8, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (110, 2017, 138636, 16, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (111, 2001, 182482, 9, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (112, 2004, 131882, 40, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (113, 2005, 187828, 32, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (114, 2005, 98942, 31, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (115, 2021, 120353, 34, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (116, 2018, 12207, 1, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (117, 2020, 39906, 22, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (118, 2020, 92137, 2, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (119, 2018, 205749, 26, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (120, 2020, 77584, 11, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (121, 2002, 34534, 32, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (122, 2001, 120156, 24, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (123, 2002, 125489, 22, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (124, 2018, 204177, 6, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (125, 2013, 183407, 13, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (126, 2012, 174794, 38, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (127, 2016, 32871, 36, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (128, 2016, 193904, 8, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (129, 2006, 108799, 31, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (130, 2006, 223991, 19, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (131, 2022, 121970, 39, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (132, 2022, 163945, 29, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (133, 2008, 69934, 30, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (134, 2019, 6003, 22, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (135, 2011, 118983, 11, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (136, 2009, 122311, 26, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (137, 2015, 38211, 11, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (138, 2014, 45334, 10, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (139, 2020, 150033, 31, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (140, 2001, 106753, 9, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (141, 2020, 204692, 22, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (142, 2018, 24515, 5, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (143, 2003, 30406, 5, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (144, 2009, 66847, 12, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (145, 2013, 131803, 20, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (146, 2005, 15412, 28, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (147, 2007, 60464, 36, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (148, 2009, 9006, 22, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (149, 2004, 86432, 14, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (150, 2006, 189543, 9, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (151, 2004, 5627, 19, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (152, 2011, 144861, 26, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (153, 2021, 120791, 38, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (154, 2005, 128262, 33, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (155, 2008, 16101, 32, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (156, 2014, 116678, 23, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (157, 2019, 117566, 3, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (158, 2020, 134328, 25, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (159, 2021, 211405, 10, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (160, 2015, 51550, 10, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (161, 2002, 92222, 4, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (162, 2020, 151501, 32, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (163, 2003, 102066, 24, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (164, 2020, 69436, 26, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (165, 2008, 89312, 33, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (166, 2019, 183262, 5, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (167, 2006, 206057, 22, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (168, 2013, 109379, 15, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (169, 2022, 46944, 7, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (170, 2010, 91253, 15, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (171, 2015, 218063, 2, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (172, 2009, 150945, 11, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (173, 2002, 111168, 22, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (174, 2006, 169531, 33, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (175, 2011, 153684, 36, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (176, 2018, 160308, 39, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (177, 2005, 16014, 8, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (178, 2011, 18685, 11, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (179, 2013, 192049, 28, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (180, 2003, 47906, 22, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (181, 2014, 52496, 5, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (182, 2015, 72656, 29, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (183, 2012, 77319, 18, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (184, 2016, 50350, 13, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (185, 2009, 20225, 12, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (186, 2016, 28370, 30, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (187, 2004, 63539, 27, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (188, 2009, 101140, 12, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (189, 2001, 60497, 36, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (190, 2019, 210733, 24, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (191, 2016, 18608, 22, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (192, 2009, 85196, 11, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (193, 2005, 106535, 31, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (194, 2011, 126129, 39, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (195, 2017, 44605, 10, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (196, 2017, 44225, 29, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (197, 2018, 120224, 9, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (198, 2015, 177765, 1, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (199, 2005, 141840, 13, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (200, 2009, 207925, 8, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (201, 2020, 187137, 39, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (202, 2022, 142524, 33, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (203, 2020, 200853, 2, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (204, 2007, 141671, 16, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (205, 2005, 189899, 18, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (206, 2020, 47755, 13, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (207, 2007, 112916, 28, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (208, 2017, 80749, 33, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (209, 2011, 118849, 14, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (210, 2018, 109424, 26, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (211, 2003, 197217, 13, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (212, 2013, 125512, 16, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (213, 2014, 36542, 5, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (214, 2007, 137261, 8, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (215, 2001, 178042, 24, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (216, 2003, 86489, 16, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (217, 2006, 78630, 2, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (218, 2004, 71194, 28, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (219, 2014, 69110, 7, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (220, 2004, 55565, 16, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (221, 2012, 156185, 33, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (222, 2019, 145459, 1, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (223, 2007, 112859, 9, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (224, 2017, 152750, 2, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (225, 2013, 176806, 19, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (226, 2022, 30718, 5, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (227, 2010, 134866, 3, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (228, 2004, 137666, 6, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (229, 2005, 14707, 36, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (230, 2004, 102164, 17, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (231, 2017, 9194, 26, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (232, 2012, 189946, 35, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (233, 2002, 18167, 21, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (234, 2006, 207185, 20, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (235, 2006, 202567, 38, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (236, 2015, 105098, 27, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (237, 2017, 9638, 5, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (238, 2014, 97394, 14, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (239, 2004, 101592, 20, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (240, 2017, 179102, 30, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (241, 2008, 174974, 20, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (242, 2006, 111060, 17, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (243, 2013, 173905, 29, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (244, 2014, 89294, 24, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (245, 2014, 49926, 22, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (246, 2003, 93781, 9, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (247, 2015, 132296, 39, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (248, 2009, 96426, 9, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (249, 2019, 199992, 25, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (250, 2022, 194220, 27, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (251, 2003, 177075, 2, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (252, 2018, 85302, 24, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (253, 2007, 206187, 33, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (254, 2017, 141056, 21, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (255, 2022, 159298, 11, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (256, 2018, 134766, 37, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (257, 2018, 181732, 29, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (258, 2017, 24396, 36, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (259, 2021, 66009, 2, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (260, 2001, 73381, 5, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (261, 2011, 201155, 15, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (262, 2003, 145202, 17, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (263, 2001, 41417, 2, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (264, 2006, 28701, 30, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (265, 2019, 209468, 25, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (266, 2017, 178954, 27, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (267, 2019, 52070, 29, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (268, 2020, 143630, 22, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (269, 2020, 169242, 38, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (270, 2011, 131567, 19, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (271, 2005, 33320, 34, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (272, 2009, 51250, 37, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (273, 2011, 91615, 32, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (274, 2004, 216235, 36, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (275, 2012, 189120, 30, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (276, 2004, 35444, 10, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (277, 2012, 99152, 22, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (278, 2022, 50588, 9, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (279, 2021, 44762, 15, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (280, 2008, 204869, 39, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (281, 2014, 8306, 36, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (282, 2021, 13598, 5, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (283, 2006, 101545, 13, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (284, 2005, 64325, 25, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (285, 2007, 107254, 40, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (286, 2017, 53715, 32, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (287, 2011, 30520, 20, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (288, 2007, 10911, 22, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (289, 2002, 176654, 35, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (290, 2013, 115454, 1, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (291, 2012, 112594, 16, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (292, 2002, 219755, 27, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (293, 2005, 108540, 37, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (294, 2013, 131442, 27, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (295, 2006, 13569, 4, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (296, 2019, 79873, 7, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (297, 2012, 100286, 21, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (298, 2017, 63858, 33, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (299, 2006, 144349, 34, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (300, 2003, 144321, 18, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (301, 2004, 112531, 35, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (302, 2017, 100377, 30, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (303, 2018, 99109, 11, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (304, 2004, 145539, 15, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (305, 2010, 193195, 40, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (306, 2002, 176276, 20, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (307, 2005, 117762, 14, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (308, 2018, 163258, 22, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (309, 2018, 174538, 6, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (310, 2012, 176234, 40, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (311, 2015, 208455, 38, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (312, 2021, 91831, 9, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (313, 2012, 177878, 15, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (314, 2015, 221150, 6, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (315, 2017, 74497, 40, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (316, 2022, 118911, 18, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (317, 2021, 161381, 1, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (318, 2016, 125508, 27, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (319, 2007, 149535, 6, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (320, 2017, 123203, 11, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (321, 2016, 16002, 40, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (322, 2013, 89813, 21, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (323, 2011, 24099, 22, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (324, 2004, 181040, 6, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (325, 2006, 142314, 18, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (326, 2005, 175949, 7, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (327, 2022, 149521, 12, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (328, 2015, 218849, 10, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (329, 2016, 46823, 10, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (330, 2014, 211617, 15, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (331, 2009, 56858, 10, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (332, 2010, 149937, 3, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (333, 2009, 51658, 13, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (334, 2001, 70573, 18, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (335, 2011, 24368, 19, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (336, 2013, 58638, 17, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (337, 2022, 126251, 37, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (338, 2021, 79861, 24, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (339, 2004, 58608, 17, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (340, 2002, 135429, 5, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (341, 2011, 207909, 19, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (342, 2002, 27114, 2, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (343, 2015, 147198, 7, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (344, 2013, 179843, 17, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (345, 2012, 115868, 3, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (346, 2010, 132218, 13, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (347, 2005, 124661, 6, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (348, 2004, 206191, 39, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (349, 2019, 62217, 8, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (350, 2014, 171485, 26, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (351, 2009, 115748, 25, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (352, 2003, 10577, 2, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (353, 2013, 99800, 8, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (354, 2005, 40178, 8, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (355, 2005, 50326, 18, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (356, 2008, 157701, 20, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (357, 2014, 113255, 19, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (358, 2004, 35102, 1, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (359, 2018, 35662, 12, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (360, 2007, 194457, 28, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (361, 2010, 216274, 25, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (362, 2007, 218757, 28, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (363, 2013, 208519, 18, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (364, 2021, 60058, 6, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (365, 2003, 177769, 33, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (366, 2022, 54899, 37, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (367, 2012, 155129, 21, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (368, 2018, 67022, 18, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (369, 2005, 148541, 40, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (370, 2018, 96105, 24, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (371, 2018, 71898, 16, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (372, 2021, 128773, 28, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (373, 2005, 32503, 20, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (374, 2012, 210361, 26, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (375, 2021, 70875, 27, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (376, 2010, 121803, 38, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (377, 2002, 112806, 22, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (378, 2018, 168040, 12, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (379, 2005, 51281, 35, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (380, 2015, 33804, 14, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (381, 2008, 41302, 20, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (382, 2016, 209264, 18, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (383, 2010, 74217, 7, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (384, 2017, 78143, 31, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (385, 2017, 207748, 27, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (386, 2017, 72837, 27, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (387, 2003, 215308, 39, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (388, 2018, 43167, 2, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (389, 2017, 49092, 1, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (390, 2019, 96407, 19, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (391, 2021, 38703, 11, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (392, 2003, 152198, 18, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (393, 2006, 68471, 2, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (394, 2020, 73733, 3, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (395, 2010, 12107, 31, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (396, 2021, 159814, 37, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (397, 2003, 109413, 32, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (398, 2011, 6542, 9, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (399, 2007, 195109, 9, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (400, 2005, 175360, 33, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (401, 2022, 121583, 8, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (402, 2021, 146133, 10, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (403, 2010, 55100, 27, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (404, 2005, 195825, 30, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (405, 2011, 59304, 23, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (406, 2001, 198073, 20, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (407, 2010, 201131, 1, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (408, 2011, 205001, 25, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (409, 2015, 19548, 40, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (410, 2004, 83034, 33, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (411, 2007, 106157, 3, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (412, 2016, 15887, 6, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (413, 2007, 28855, 37, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (414, 2019, 36025, 27, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (415, 2010, 74431, 30, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (416, 2009, 90108, 1, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (417, 2017, 211135, 15, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (418, 2017, 157182, 34, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (419, 2010, 116830, 6, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (420, 2013, 70416, 24, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (421, 2006, 207056, 15, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (422, 2014, 142996, 3, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (423, 2011, 203980, 7, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (424, 2018, 153499, 38, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (425, 2009, 111966, 38, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (426, 2018, 156250, 17, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (427, 2010, 130061, 12, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (428, 2013, 201340, 29, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (429, 2012, 172966, 2, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (430, 2008, 108112, 9, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (431, 2019, 44251, 30, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (432, 2001, 221224, 26, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (433, 2011, 90066, 16, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (434, 2010, 17481, 33, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (435, 2003, 158703, 13, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (436, 2005, 132519, 31, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (437, 2003, 189040, 4, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (438, 2011, 29680, 19, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (439, 2016, 183752, 28, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (440, 2020, 180773, 23, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (441, 2017, 173534, 10, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (442, 2005, 81113, 1, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (443, 2016, 52666, 19, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (444, 2009, 168233, 19, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (445, 2009, 135980, 4, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (446, 2006, 64368, 30, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (447, 2002, 71304, 30, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (448, 2012, 15777, 30, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (449, 2007, 13700, 24, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (450, 2007, 224955, 36, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (451, 2003, 52269, 3, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (452, 2013, 65702, 25, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (453, 2013, 14969, 6, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (454, 2014, 88709, 38, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (455, 2020, 149599, 14, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (456, 2019, 164432, 24, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (457, 2007, 177744, 10, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (458, 2009, 158848, 30, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (459, 2013, 218218, 37, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (460, 2011, 49000, 12, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (461, 2018, 138419, 4, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (462, 2003, 5157, 33, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (463, 2010, 69149, 21, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (464, 2017, 44842, 8, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (465, 2016, 52173, 3, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (466, 2010, 137794, 2, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (467, 2009, 190874, 36, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (468, 2016, 162084, 9, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (469, 2016, 124904, 27, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (470, 2011, 26034, 18, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (471, 2006, 13882, 28, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (472, 2012, 190813, 23, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (473, 2006, 224256, 36, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (474, 2017, 119530, 21, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (475, 2019, 161303, 22, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (476, 2011, 116858, 2, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (477, 2014, 150769, 40, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (478, 2002, 46064, 2, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (479, 2002, 168397, 12, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (480, 2014, 144670, 38, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (481, 2004, 180694, 30, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (482, 2001, 45600, 28, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (483, 2016, 162843, 15, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (484, 2022, 24350, 15, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (485, 2015, 116621, 15, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (486, 2009, 200309, 5, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (487, 2014, 221352, 25, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (488, 2005, 163351, 35, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (489, 2011, 44740, 32, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (490, 2013, 206595, 27, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (491, 2003, 35830, 33, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (492, 2001, 150875, 29, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (493, 2004, 62249, 36, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (494, 2015, 35323, 35, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (495, 2017, 169072, 16, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (496, 2014, 21825, 3, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (497, 2021, 100998, 6, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (498, 2017, 126787, 40, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (499, 2014, 61025, 12, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (500, 2017, 148612, 7, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (501, 2002, 216727, 37, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (502, 2022, 46715, 15, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (503, 2021, 190924, 18, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (504, 2017, 82743, 2, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (505, 2013, 84470, 26, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (506, 2001, 173261, 12, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (507, 2018, 80468, 35, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (508, 2005, 102012, 20, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (509, 2022, 183799, 40, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (510, 2002, 40410, 11, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (511, 2008, 64453, 10, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (512, 2010, 100014, 37, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (513, 2009, 7229, 31, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (514, 2008, 22280, 28, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (515, 2005, 66307, 22, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (516, 2002, 49472, 29, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (517, 2001, 68687, 11, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (518, 2018, 73034, 18, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (519, 2016, 100126, 7, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (520, 2004, 117670, 13, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (521, 2012, 210023, 1, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (522, 2004, 211977, 38, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (523, 2012, 151437, 19, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (524, 2005, 26033, 37, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (525, 2015, 180764, 17, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (526, 2014, 48670, 25, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (527, 2006, 55792, 12, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (528, 2002, 214459, 1, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (529, 2001, 59864, 12, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (530, 2010, 209414, 9, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (531, 2021, 12989, 1, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (532, 2011, 106729, 32, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (533, 2011, 201875, 21, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (534, 2013, 190517, 39, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (535, 2006, 81934, 30, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (536, 2018, 134699, 3, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (537, 2005, 154164, 27, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (538, 2012, 59010, 2, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (539, 2017, 72218, 6, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (540, 2006, 199254, 37, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (541, 2018, 111108, 23, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (542, 2006, 7284, 9, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (543, 2003, 220653, 27, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (544, 2012, 205105, 17, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (545, 2006, 141629, 9, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (546, 2022, 202797, 9, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (547, 2005, 221858, 31, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (548, 2019, 124807, 11, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (549, 2009, 74314, 38, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (550, 2006, 70825, 30, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (551, 2014, 40300, 37, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (552, 2012, 57123, 33, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (553, 2004, 114109, 32, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (554, 2012, 112705, 13, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (555, 2021, 216333, 37, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (556, 2016, 132873, 30, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (557, 2014, 203037, 5, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (558, 2005, 181184, 1, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (559, 2022, 26159, 21, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (560, 2002, 96257, 36, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (561, 2009, 125126, 18, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (562, 2008, 183452, 26, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (563, 2002, 83065, 17, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (564, 2006, 174570, 25, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (565, 2017, 141157, 29, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (566, 2018, 66650, 11, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (567, 2002, 118817, 4, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (568, 2019, 65516, 35, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (569, 2003, 96297, 8, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (570, 2006, 47566, 20, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (571, 2009, 210159, 23, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (572, 2007, 48787, 18, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (573, 2002, 202999, 2, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (574, 2013, 78440, 40, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (575, 2020, 80627, 3, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (576, 2019, 91224, 17, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (577, 2004, 133815, 31, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (578, 2002, 94727, 18, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (579, 2015, 189933, 4, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (580, 2001, 47334, 5, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (581, 2001, 52473, 40, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (582, 2022, 200634, 40, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (583, 2012, 85251, 36, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (584, 2003, 92167, 5, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (585, 2007, 224993, 3, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (586, 2009, 7775, 14, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (587, 2013, 178159, 22, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (588, 2012, 88598, 33, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (589, 2006, 51253, 38, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (590, 2017, 217039, 30, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (591, 2018, 83245, 27, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (592, 2014, 215679, 6, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (593, 2019, 152817, 19, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (594, 2004, 162474, 6, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (595, 2013, 114500, 26, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (596, 2008, 85223, 29, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (597, 2006, 134748, 30, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (598, 2009, 121190, 1, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (599, 2014, 138507, 16, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (600, 2019, 214012, 2, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (601, 2003, 171983, 30, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (602, 2012, 117268, 10, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (603, 2004, 69884, 5, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (604, 2019, 89024, 12, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (605, 2002, 106806, 36, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (606, 2005, 219820, 24, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (607, 2020, 8631, 3, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (608, 2009, 35104, 27, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (609, 2011, 70279, 40, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (610, 2016, 212234, 18, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (611, 2007, 54171, 22, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (612, 2017, 215169, 23, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (613, 2006, 133709, 16, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (614, 2010, 200787, 2, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (615, 2013, 208789, 20, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (616, 2007, 189394, 11, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (617, 2007, 16958, 39, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (618, 2010, 151033, 7, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (619, 2017, 159790, 25, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (620, 2004, 39277, 13, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (621, 2011, 147848, 14, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (622, 2012, 46241, 26, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (623, 2013, 193506, 23, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (624, 2011, 5086, 16, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (625, 2005, 217381, 25, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (626, 2020, 188567, 27, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (627, 2009, 138301, 17, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (628, 2008, 168442, 19, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (629, 2017, 25790, 19, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (630, 2013, 35148, 5, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (631, 2011, 35398, 13, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (632, 2019, 220103, 4, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (633, 2002, 170440, 40, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (634, 2022, 133066, 21, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (635, 2009, 222208, 9, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (636, 2008, 57255, 29, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (637, 2018, 71885, 1, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (638, 2013, 91503, 14, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (639, 2005, 218899, 11, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (640, 2010, 146653, 35, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (641, 2014, 8857, 38, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (642, 2014, 162565, 40, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (643, 2013, 17143, 23, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (644, 2001, 190233, 29, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (645, 2016, 101487, 38, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (646, 2003, 13535, 15, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (647, 2019, 174438, 26, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (648, 2019, 210823, 29, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (649, 2013, 193321, 11, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (650, 2007, 97630, 5, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (651, 2013, 160456, 23, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (652, 2017, 194893, 8, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (653, 2019, 27063, 24, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (654, 2001, 48572, 38, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (655, 2004, 150863, 27, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (656, 2007, 205761, 23, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (657, 2009, 137077, 26, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (658, 2022, 24531, 30, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (659, 2003, 203891, 19, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (660, 2005, 179431, 19, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (661, 2011, 163384, 28, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (662, 2001, 15109, 37, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (663, 2017, 21988, 15, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (664, 2006, 87821, 11, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (665, 2022, 163799, 5, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (666, 2006, 43659, 4, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (667, 2010, 60823, 32, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (668, 2020, 22834, 15, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (669, 2003, 109616, 19, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (670, 2010, 180555, 35, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (671, 2004, 58740, 18, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (672, 2019, 65465, 38, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (673, 2022, 172757, 13, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (674, 2001, 113733, 7, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (675, 2015, 98856, 39, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (676, 2020, 129735, 14, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (677, 2009, 37268, 4, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (678, 2001, 11813, 1, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (679, 2020, 147795, 32, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (680, 2020, 12296, 30, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (681, 2007, 222917, 10, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (682, 2016, 192256, 11, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (683, 2016, 36314, 15, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (684, 2004, 16141, 33, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (685, 2021, 103134, 21, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (686, 2018, 116523, 19, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (687, 2017, 110184, 27, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (688, 2018, 160397, 38, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (689, 2003, 32524, 19, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (690, 2001, 8800, 9, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (691, 2004, 60741, 8, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (692, 2017, 187366, 40, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (693, 2003, 85057, 24, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (694, 2008, 133276, 25, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (695, 2001, 30784, 4, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (696, 2006, 177761, 28, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (697, 2009, 65386, 35, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (698, 2017, 18965, 23, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (699, 2002, 182054, 7, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (700, 2022, 25976, 25, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (701, 2019, 68564, 7, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (702, 2016, 65422, 7, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (703, 2012, 137669, 35, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (704, 2005, 139984, 11, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (705, 2002, 37943, 14, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (706, 2011, 92246, 30, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (707, 2005, 25555, 7, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (708, 2006, 207191, 39, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (709, 2016, 216968, 34, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (710, 2016, 152149, 17, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (711, 2014, 58648, 14, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (712, 2006, 93684, 38, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (713, 2004, 116391, 38, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (714, 2009, 159334, 6, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (715, 2015, 144281, 13, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (716, 2009, 121523, 19, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (717, 2018, 103014, 19, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (718, 2002, 126496, 31, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (719, 2016, 212154, 10, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (720, 2004, 193355, 12, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (721, 2018, 24550, 39, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (722, 2019, 131847, 21, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (723, 2001, 212957, 29, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (724, 2010, 17701, 26, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (725, 2016, 65495, 19, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (726, 2013, 167073, 4, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (727, 2007, 28247, 38, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (728, 2022, 32698, 22, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (729, 2021, 34090, 10, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (730, 2012, 139286, 25, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (731, 2005, 207856, 18, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (732, 2021, 44643, 32, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (733, 2017, 35821, 35, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (734, 2005, 178388, 13, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (735, 2007, 160176, 1, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (736, 2012, 164488, 19, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (737, 2010, 169491, 29, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (738, 2002, 14572, 28, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (739, 2017, 110350, 4, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (740, 2020, 80074, 25, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (741, 2013, 141251, 25, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (742, 2012, 68320, 1, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (743, 2014, 192828, 28, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (744, 2003, 179342, 21, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (745, 2018, 158355, 8, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (746, 2006, 180290, 26, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (747, 2002, 113017, 10, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (748, 2002, 154821, 15, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (749, 2009, 115665, 19, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (750, 2003, 189632, 39, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (751, 2007, 65154, 18, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (752, 2015, 109974, 35, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (753, 2016, 104899, 33, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (754, 2014, 153099, 39, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (755, 2007, 83540, 26, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (756, 2006, 154116, 8, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (757, 2009, 72175, 34, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (758, 2008, 79642, 15, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (759, 2019, 167614, 2, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (760, 2013, 120289, 20, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (761, 2002, 103177, 3, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (762, 2021, 88414, 26, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (763, 2022, 149600, 34, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (764, 2003, 11265, 25, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (765, 2005, 147659, 29, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (766, 2012, 175547, 25, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (767, 2015, 127985, 34, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (768, 2019, 182530, 32, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (769, 2018, 99464, 33, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (770, 2015, 83567, 38, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (771, 2010, 63307, 32, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (772, 2008, 151129, 23, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (773, 2018, 110830, 36, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (774, 2020, 33889, 40, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (775, 2005, 136438, 26, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (776, 2021, 212571, 8, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (777, 2015, 109114, 31, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (778, 2006, 48120, 6, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (779, 2011, 198591, 10, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (780, 2008, 136105, 14, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (781, 2018, 55441, 14, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (782, 2021, 109084, 2, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (783, 2004, 220718, 31, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (784, 2016, 26676, 26, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (785, 2014, 81034, 11, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (786, 2003, 182547, 13, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (787, 2006, 112874, 40, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (788, 2019, 139066, 38, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (789, 2006, 180731, 6, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (790, 2005, 193452, 22, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (791, 2004, 56278, 24, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (792, 2010, 74964, 36, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (793, 2012, 89143, 3, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (794, 2020, 79536, 28, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (795, 2015, 42289, 32, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (796, 2007, 16777, 35, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (797, 2010, 176553, 19, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (798, 2020, 118065, 25, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (799, 2007, 77826, 7, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (800, 2013, 88017, 38, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (801, 2014, 187251, 26, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (802, 2001, 160480, 3, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (803, 2004, 119301, 28, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (804, 2007, 111585, 7, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (805, 2008, 25636, 21, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (806, 2008, 198227, 3, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (807, 2016, 198531, 27, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (808, 2018, 95390, 5, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (809, 2008, 103300, 17, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (810, 2009, 202013, 34, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (811, 2005, 66540, 6, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (812, 2009, 150025, 36, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (813, 2010, 108014, 14, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (814, 2017, 172986, 6, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (815, 2020, 50545, 14, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (816, 2015, 37421, 14, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (817, 2016, 77015, 13, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (818, 2017, 73386, 37, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (819, 2020, 41028, 11, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (820, 2020, 44111, 35, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (821, 2015, 160898, 38, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (822, 2012, 87537, 13, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (823, 2021, 139016, 30, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (824, 2013, 42039, 27, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (825, 2013, 10925, 18, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (826, 2004, 140445, 23, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (827, 2022, 102643, 2, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (828, 2011, 207979, 17, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (829, 2021, 46493, 3, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (830, 2001, 24311, 4, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (831, 2009, 126164, 20, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (832, 2015, 126982, 12, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (833, 2001, 33545, 23, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (834, 2008, 125653, 26, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (835, 2010, 57673, 25, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (836, 2003, 216072, 40, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (837, 2008, 103030, 7, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (838, 2004, 142024, 9, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (839, 2007, 68513, 20, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (840, 2021, 51361, 30, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (841, 2008, 79284, 29, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (842, 2007, 135875, 9, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (843, 2014, 17903, 10, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (844, 2013, 107901, 24, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (845, 2021, 148149, 26, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (846, 2010, 206481, 37, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (847, 2020, 162979, 40, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (848, 2017, 153940, 20, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (849, 2017, 189684, 6, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (850, 2019, 18350, 24, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (851, 2017, 46450, 34, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (852, 2008, 197115, 10, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (853, 2002, 25747, 16, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (854, 2005, 43054, 29, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (855, 2021, 177778, 7, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (856, 2001, 62643, 3, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (857, 2010, 96298, 35, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (858, 2018, 41617, 2, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (859, 2001, 74628, 26, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (860, 2013, 203724, 27, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (861, 2001, 223208, 24, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (862, 2013, 143651, 31, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (863, 2005, 139867, 7, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (864, 2018, 73429, 27, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (865, 2015, 153386, 16, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (866, 2020, 99983, 10, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (867, 2007, 77011, 15, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (868, 2021, 86548, 8, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (869, 2002, 211604, 28, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (870, 2002, 63076, 10, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (871, 2003, 164294, 40, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (872, 2012, 176713, 18, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (873, 2012, 60098, 29, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (874, 2010, 87834, 29, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (875, 2006, 147723, 20, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (876, 2014, 137277, 27, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (877, 2006, 197084, 23, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (878, 2004, 77829, 22, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (879, 2002, 77589, 28, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (880, 2012, 81922, 11, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (881, 2012, 202994, 7, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (882, 2007, 10910, 31, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (883, 2021, 155352, 26, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (884, 2015, 222613, 3, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (885, 2018, 88549, 17, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (886, 2013, 135136, 30, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (887, 2020, 7902, 39, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (888, 2020, 116399, 10, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (889, 2009, 199932, 3, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (890, 2002, 191665, 19, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (891, 2006, 42806, 7, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (892, 2004, 107937, 3, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (893, 2021, 169697, 1, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (894, 2004, 134811, 3, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (895, 2011, 32639, 9, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (896, 2013, 190220, 37, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (897, 2010, 128907, 5, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (898, 2013, 116034, 6, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (899, 2019, 165595, 7, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (900, 2018, 135638, 3, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (901, 2012, 92299, 33, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (902, 2009, 177566, 11, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (903, 2011, 120321, 20, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (904, 2019, 142072, 7, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (905, 2019, 159581, 27, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (906, 2010, 72140, 15, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (907, 2022, 54442, 2, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (908, 2012, 85991, 23, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (909, 2010, 175538, 10, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (910, 2008, 120988, 2, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (911, 2008, 68511, 32, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (912, 2013, 179626, 25, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (913, 2008, 65489, 29, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (914, 2001, 216876, 20, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (915, 2016, 191756, 17, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (916, 2014, 91130, 19, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (917, 2018, 209960, 18, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (918, 2010, 180400, 32, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (919, 2005, 215772, 20, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (920, 2002, 20421, 28, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (921, 2008, 164383, 23, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (922, 2017, 107198, 37, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (923, 2012, 96011, 35, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (924, 2020, 106164, 24, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (925, 2009, 170637, 20, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (926, 2006, 94854, 12, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (927, 2022, 192182, 8, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (928, 2010, 65655, 35, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (929, 2009, 125310, 30, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (930, 2003, 50432, 14, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (931, 2021, 183554, 8, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (932, 2022, 15307, 37, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (933, 2012, 31024, 32, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (934, 2006, 220075, 20, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (935, 2003, 204396, 10, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (936, 2005, 27600, 35, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (937, 2007, 149849, 26, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (938, 2010, 80934, 28, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (939, 2005, 44937, 32, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (940, 2019, 189557, 15, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (941, 2021, 35769, 4, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (942, 2016, 38043, 18, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (943, 2016, 64503, 40, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (944, 2018, 142500, 34, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (945, 2006, 223500, 23, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (946, 2015, 95599, 24, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (947, 2012, 26288, 1, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (948, 2012, 21056, 10, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (949, 2017, 159513, 15, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (950, 2005, 215328, 9, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (951, 2016, 187572, 1, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (952, 2005, 41272, 9, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (953, 2013, 31428, 5, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (954, 2006, 126576, 21, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (955, 2014, 129565, 22, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (956, 2004, 29613, 21, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (957, 2014, 214676, 24, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (958, 2011, 22545, 17, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (959, 2005, 43952, 38, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (960, 2006, 156047, 29, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (961, 2005, 92326, 1, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (962, 2003, 208699, 10, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (963, 2017, 107567, 37, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (964, 2003, 19853, 27, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (965, 2005, 35051, 2, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (966, 2018, 5683, 21, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (967, 2020, 169447, 8, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (968, 2018, 131907, 36, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (969, 2007, 136506, 22, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (970, 2019, 133307, 32, 6, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (971, 2011, 68533, 2, 3, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (972, 2012, 197015, 40, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (973, 2005, 167321, 36, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (974, 2015, 211126, 12, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (975, 2003, 9367, 39, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (976, 2005, 169975, 35, 5, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (977, 2009, 143918, 26, 1, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (978, 2012, 12206, 15, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (979, 2012, 150075, 5, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (980, 2019, 64900, 1, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (981, 2020, 221540, 20, 5, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (982, 2004, 197700, 36, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (983, 2013, 52027, 16, 2, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (984, 2012, 16342, 30, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (985, 2013, 113328, 19, 4, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (986, 2021, 145565, 25, 7, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (987, 2007, 188812, 21, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (988, 2022, 193620, 28, 6, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (989, 2013, 62869, 6, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (990, 2012, 104846, 19, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (991, 2018, 220890, 7, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (992, 2015, 116947, 18, 8, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (993, 2015, 217873, 15, 3, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (994, 2004, 223090, 34, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (995, 2001, 120600, 11, 8, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (996, 2019, 123668, 39, 1, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (997, 2010, 62972, 31, 2, 1);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (998, 2019, 189666, 13, 4, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (999, 2008, 32856, 10, 7, 2);
+insert into Vozilo (VoziloID, GodinaProizvodnje, PredjenoKM, ModelID, BojaID, GorivoID) values (1000, 2019, 22300, 9, 5, 1);
